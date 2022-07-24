@@ -52,7 +52,7 @@ func main() {
 		Handler: routes(&app),
 	}
 
-	fmt.Printf("Starting server on http://localhost:%v/\n", portNumber)
+	fmt.Printf("Starting server on http://localhost%v/\n", portNumber)
 	err = srv.ListenAndServe()
 	if err != nil {
 		log.Fatal("Error starting server: ", err)
