@@ -1,0 +1,48 @@
+{{template "base" .}}
+
+{{define "css"}}
+<style>
+    .room-image {
+        max-width: 50%;
+    }
+</style>
+{{end}}
+
+{{define "content"}}
+<!-- Main Content -->
+<div class="container">
+
+    <!-- Image -->
+    <div class="row">
+        <div class="col">
+            <img src="/static/images/executive.png" class="img-fluid img-thumbnail mx-auto d-block room-image"
+                alt="Executive Room">
+        </div>
+    </div>
+
+    <!-- Description -->
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center mt-4">Executive Suite</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis sunt omnis voluptatum debitis
+                veritatis iste quisquam labore. Id neque ea, laboriosam molestiae quasi perspiciatis rem debitis,
+                voluptatem natus ut assumenda. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem
+                consequatur non aliquam provident reiciendis esse libero expedita dolores facilis quod voluptate omnis
+                impedit iure eius, porro quisquam facere eos vero. Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Reprehenderit odio unde sunt officiis debitis, minima omnis optio quam et odit numquam, placeat
+                dolore nam minus cum aut expedita, molestias aperiam. Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Ullam, delectus, deleniti quaerat earum temporibus reiciendis in quisquam cupiditate aliquam
+                laboriosam rerum, obcaecati architecto dolores quasi. Recusandae natus distinctio earum ea.
+            </p>
+        </div>
+    </div>
+
+    <!-- Button -->
+    <div class="row">
+        <div class="col text-center">
+            <a class="btn btn-success" href="/make-reservation-e">Check Availability</a>
+        </div>
+    </div>
+</div>
+{{end}}
