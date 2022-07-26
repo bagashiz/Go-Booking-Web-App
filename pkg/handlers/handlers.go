@@ -48,3 +48,23 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 		StringMap: stringMap,
 	})
 }
+
+// Executive is the executive page handler function
+func (m *Repository) Executive(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "executive.page.html", &models.TemplateData{})
+}
+
+// Deluxe is the deluxe page handler function
+func (m *Repository) Deluxe(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "deluxe.page.html", &models.TemplateData{})
+}
+
+// Reservation is the reservation page handler function
+func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "reservation.page.html", &models.TemplateData{})
+}
+
+// Contact is the contact page handler function
+func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "contact.page.html", &models.TemplateData{})
+}
