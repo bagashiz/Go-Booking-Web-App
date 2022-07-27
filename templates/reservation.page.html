@@ -87,9 +87,21 @@
             text: msg,
         })
     }
+
+    // notifyModal function with sweetalert2
+    function notifyModal(title, html, icon, confirmButtonText) {
+        Swal.fire({
+            title: title,
+            html: html,
+            icon: icon,
+            confirmButtonText: confirmButtonText,
+        })
+    }
 </script>
 <!-- vanillajs-datepicker -->
 <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/js/datepicker-full.min.js"></script>
 <!-- notie -->
 <script src="https://unpkg.com/notie"></script>
+<!-- sweetalert2 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{end}}
