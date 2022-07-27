@@ -9,23 +9,48 @@
             <h1 class="mt-5 ">Search Available Rooms</h1>
 
             <!-- Search Form -->
-            <form action="" method="GET">
+            <form action="" method="GET" novalidate class="needs-validation">
                 <!-- Room Type -->
                 <div class="row row-cols-2">
                     <div class="col">
                         <label for="checkInDate" class="form-label">Check In</label>
-                        <input type="date" class="form-control" id="checkInDate" name="checkInDate" aria-describedby="checkInDateHelp" required>
+                        <input type="date" class="form-control" id="checkInDate" name="checkInDate"
+                            aria-describedby="checkInDateHelp" required>
                         <div id="checkInDateHelp" class="form-text">Enter your check-in date.</div>
                     </div>
                     <div class="col">
                         <label for="checkOutDate" class="form-label">Check Out</label>
-                        <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" aria-describedby="checkOutDateHelp" required>
+                        <input type="date" class="form-control" id="checkOutDate" name="checkOutDate"
+                            aria-describedby="checkOutDateHelp" required>
                         <div id="checkOutDateHelp" class="form-text">Enter your check-out date.</div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-5">Search</button>
+                <button type="submit" class="btn btn-primary mt-4">Search</button>
             </form>
         </div>
     </div>
 </div>
+{{end}}
+
+{{define "js"}}
+<script>
+    // Example starter javascript for disabling gorm submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            let forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })(); 
+</script>
 {{end}}
