@@ -1,5 +1,18 @@
 {{template "base" .}}
 
+{{define "css"}}
+<!-- vanillajs-datepicker -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/css/datepicker-bs5.min.css">
+<!-- notie -->
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+
+<style>
+    .notie-container {
+        box-shadow: none;
+    }
+</style>
+{{end}}
+
 {{define "content"}}
 <!-- Main Content -->
 <div class="container">
@@ -13,19 +26,27 @@
                 <!-- Room Type -->
                 <div class="row row-cols-2">
                     <div class="col">
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
+
+                <div class="row row-cols-2" id="reservationDates">
+                    <div class="col">
                         <label for="checkInDate" class="form-label">Check In</label>
-                        <input type="date" class="form-control" id="checkInDate" name="checkInDate"
-                            aria-describedby="checkInDateHelp" required>
+                        <input type="text" class="form-control" id="checkInDate" name="checkInDate"
+                            aria-describedby="checkInDateHelp" placeholder="Arrival" required>
                         <div id="checkInDateHelp" class="form-text">Enter your check-in date.</div>
                     </div>
                     <div class="col">
                         <label for="checkOutDate" class="form-label">Check Out</label>
-                        <input type="date" class="form-control" id="checkOutDate" name="checkOutDate"
-                            aria-describedby="checkOutDateHelp" required>
+                        <input type="text" class="form-control" id="checkOutDate" name="checkOutDate"
+                            aria-describedby="checkOutDateHelp" placeholder="Departure" required>
                         <div id="checkOutDateHelp" class="form-text">Enter your check-out date.</div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-4">Search</button>
+                <hr>
+                <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
     </div>
@@ -33,8 +54,14 @@
 {{end}}
 
 {{define "js"}}
+
 <script>
-    // Example starter javascript for disabling gorm submissions if there are invalid fields
+    const elem = document.getElementById("reservationDates");
+    const rangepicker = new DateRangePicker(elem, {
+        format: yyyy - mm - dd,
+    });
+
+    // bootstrap form submissions validator
     (function () {
         'use strict';
         window.addEventListener('load', function () {
@@ -51,6 +78,18 @@
                 }, false);
             });
         }, false);
-    })(); 
+    })();
+
+    // notify function with notie
+    function notify(msg, msgType) {
+        notie.alert({
+            type: msgType, // optional, default = 4, enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
+            text: msg,
+        })
+    }
 </script>
+<!-- vanillajs-datepicker -->
+<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/js/datepicker-full.min.js"></script>
+<!-- notie -->
+<script src="https://unpkg.com/notie"></script>
 {{end}}
