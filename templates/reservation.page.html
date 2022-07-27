@@ -1,11 +1,6 @@
 {{template "base" .}}
 
 {{define "css"}}
-<!-- vanillajs-datepicker -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/css/datepicker-bs5.min.css">
-<!-- notie -->
-<link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
-
 <style>
     .notie-container {
         box-shadow: none;
@@ -22,7 +17,7 @@
             <h1 class="mt-5 ">Search Available Rooms</h1>
 
             <!-- Search Form -->
-            <form action="" method="GET" novalidate class="needs-validation">
+            <form action="" method="POST" novalidate class="needs-validation">
                 <!-- Room Type -->
                 <div class="row row-cols-2">
                     <div class="col">
@@ -54,54 +49,10 @@
 {{end}}
 
 {{define "js"}}
-
 <script>
     const elem = document.getElementById("reservationDates");
     const rangepicker = new DateRangePicker(elem, {
-        format: yyyy - mm - dd,
+        format: "yyyy-mm-dd",
     });
-
-    // bootstrap form submissions validator
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            let forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-
-    // notify function with notie
-    function notify(msg, msgType) {
-        notie.alert({
-            type: msgType, // optional, default = 4, enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
-            text: msg,
-        })
-    }
-
-    // notifyModal function with sweetalert2
-    function notifyModal(title, html, icon, confirmButtonText) {
-        Swal.fire({
-            title: title,
-            html: html,
-            icon: icon,
-            confirmButtonText: confirmButtonText,
-        })
-    }
 </script>
-<!-- vanillajs-datepicker -->
-<script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/js/datepicker-full.min.js"></script>
-<!-- notie -->
-<script src="https://unpkg.com/notie"></script>
-<!-- sweetalert2 -->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{end}}
