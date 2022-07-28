@@ -28,7 +28,7 @@ func AddDefaultData(td *models.TemplateData) *models.TemplateData {
 }
 
 // RenderTemplate is a function that renders a template
-func RenderTemplate(w http.ResponseWriter, html string, td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 
 	if app.UseCache {
@@ -37,9 +37,9 @@ func RenderTemplate(w http.ResponseWriter, html string, td *models.TemplateData)
 		tc, _ = CreateTemplateCache()
 	}
 
-	h, ok := tc[html]
+	h, ok := tc[tmpl]
 	if !ok {
-		log.Fatal("Cannot get template: ", html)
+		log.Fatal("Cannot get template: ", tmpl)
 	}
 
 	buf := new(bytes.Buffer)
@@ -48,7 +48,7 @@ func RenderTemplate(w http.ResponseWriter, html string, td *models.TemplateData)
 
 	_, err := buf.WriteTo(w)
 	if err != nil {
-		log.Printf("Error writing template %v: %v\n", html, err)
+		log.Printf("Error writing template %v: %v\n", tmpl, err)
 	}
 }
 
@@ -56,7 +56,7 @@ func RenderTemplate(w http.ResponseWriter, html string, td *models.TemplateData)
 func CreateTemplateCache() (map[string]*template.Template, error) {
 	myCache := map[string]*template.Template{}
 
-	pages, err := filepath.Glob("./templates/*.html")
+	pages, err := filepath.Glob("./templates/*.tmpl")
 	if err != nil {
 		return myCache, err
 	}
@@ -69,13 +69,13 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 			return myCache, err
 		}
 
-		matches, err := filepath.Glob("./templates/*.layout.html")
+		matches, err := filepath.Glob("./templates/*.layout.tmpl")
 		if err != nil {
 			return myCache, err
 		}
 
 		if len(matches) > 0 {
-			templateSet, err = templateSet.ParseGlob("./templates/*.layout.html")
+			templateSet, err = templateSet.ParseGlob("./templates/*.layout.tmpl")
 			if err != nil {
 				return myCache, err
 			}
