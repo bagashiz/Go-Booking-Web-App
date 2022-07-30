@@ -9,7 +9,8 @@
             <h1 class="mt-5 ">Search Available Rooms</h1>
 
             <!-- Search Form -->
-            <form action="" method="POST" novalidate class="needs-validation">
+            <form action="/search-availability" method="POST" novalidate class="needs-validation">
+                <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
                 <!-- Room Type -->
                 <div class="row row-cols-2">
                     <div class="col">

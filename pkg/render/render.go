@@ -9,6 +9,7 @@ import (
 
 	"github.com/bagashiz/Go-Booking-Web-App/pkg/config"
 	"github.com/bagashiz/Go-Booking-Web-App/pkg/models"
+	"github.com/justinas/nosurf"
 )
 
 // functions is a variable that holds the FuncMap for the templates
@@ -23,12 +24,13 @@ func NewTemplates(a *config.AppConfig) {
 }
 
 // AddDefaultFunctions is a function that adds the default data from TemplateData to the pages
-func AddDefaultData(td *models.TemplateData) *models.TemplateData {
+func AddDefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.CSRFToken = nosurf.Token(r)
 	return td
 }
 
 // RenderTemplate is a function that renders a template
-func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) error {
 	var tc map[string]*template.Template
 
 	if app.UseCache {
@@ -43,13 +45,15 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData)
 	}
 
 	buf := new(bytes.Buffer)
-	td = AddDefaultData(td)
+	td = AddDefaultData(td, r)
 	h.Execute(buf, td)
 
 	_, err := buf.WriteTo(w)
 	if err != nil {
 		log.Printf("Error writing template %v: %v\n", tmpl, err)
 	}
+
+	return nil
 }
 
 // CreateTemplateCache is a function that creates a template cache to store the templates in memory for faster rendering

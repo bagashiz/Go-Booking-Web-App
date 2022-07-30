@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/bagashiz/Go-Booking-Web-App/pkg/config"
@@ -33,7 +34,7 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	remoteIP := r.RemoteAddr
 	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
 
-	render.RenderTemplate(w, "home.page.tmpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "home.page.tmpl", &models.TemplateData{})
 }
 
 // About is the about page handler function
@@ -44,32 +45,40 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	remoteIP := m.App.Session.GetString(r.Context(), "remote_ip")
 	stringMap["remote_ip"] = remoteIP
 
-	render.RenderTemplate(w, "about.page.tmpl", &models.TemplateData{
+	render.RenderTemplate(w, r, "about.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }
 
 // Executive is the executive page handler function
 func (m *Repository) Executive(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "executive.page.tmpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "executive.page.tmpl", &models.TemplateData{})
 }
 
 // Deluxe is the deluxe page handler function
 func (m *Repository) Deluxe(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "deluxe.page.tmpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "deluxe.page.tmpl", &models.TemplateData{})
 }
 
 // Availability is the search for available room page handler function
 func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "search-availability.page.tmpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "search-availability.page.tmpl", &models.TemplateData{})
+}
+
+// PostAvailability is the search for available room page handler function
+func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
+	checkInDate := r.Form.Get("checkInDate")
+	checkOutDate := r.Form.Get("checkOutDate")
+
+	w.Write([]byte(fmt.Sprintf("Check-In Date: %s\nCheck-Out Date: %s\n", checkInDate, checkOutDate)))
 }
 
 // Contact is the contact page handler function
 func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "contact.page.tmpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "contact.page.tmpl", &models.TemplateData{})
 }
 
 // Contact is the contact page handler function
 func (m *Repository) MakeReservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "make-reservation.page.tmpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{})
 }
