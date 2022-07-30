@@ -1,13 +1,5 @@
 {{template "base" .}}
 
-{{define "css"}}
-<style>
-    .notie-container {
-        box-shadow: none;
-    }
-</style>
-{{end}}
-
 {{define "content"}}
 <!-- Main Content -->
 <div class="container">
@@ -50,6 +42,7 @@
 
 {{define "js"}}
 <script>
+    // Datepicker for check-in and check-out dates in search-availability page
     const elem = document.getElementById("reservationDates");
     const rangepicker = new DateRangePicker(elem, {
         format: "yyyy-mm-dd",

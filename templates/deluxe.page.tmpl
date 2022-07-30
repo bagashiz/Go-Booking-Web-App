@@ -41,9 +41,37 @@
     <!-- Button -->
     <div class="row">
         <div class="col text-center">
-            <a class="btn btn-success" href="/make-reservation-d">Check Availability</a>
+            <a id="check-availability-button" class="btn btn-success" href="#!">Check Availability</a>
         </div>
     </div>
-    
 </div>
+{{end}}
+
+{{define "js"}}
+<script>
+    // set html template for pop up prompt
+    document.getElementById("check-availability-button").addEventListener("click", function () {
+        let html = `
+        <form id="check-availability-form" action="" method="POST" novalidate class="needs-validation">
+            <div class="row mx-auto">
+                <div class="col">
+                    <div class="row row-cols-2" id="reservation-dates-modal">
+                        <div class="col">
+                            <input disabled required class="form-control" type="text" name="checkInDate" id="checkInDate" placeholder="Arrival">
+                        </div>
+                        <div class="col">
+                            <input disabled required class="form-control" type="text" name="checkOutDate" id="checkOutDate" placeholder="Departure">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+        `;
+        attention.custom({
+            title: 'Choose your dates',
+            msg: html,
+        });
+    });
+</script>
 {{end}}

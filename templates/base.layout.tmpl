@@ -16,20 +16,8 @@
         href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.2.0/dist/css/datepicker-bs5.min.css">
     <!-- notie -->
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
-
-    <!-- Custom CSS -->
-    <style>
-        .my-footer {
-            height: 5em;
-            background-color: #212529;
-            margin-top: 1.5em;
-            padding: 1em;
-            text-align: center;
-            font-size: 80%;
-            color: #ffffff;
-        }
-    </style>
-
+    <!-- Local custom CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
     {{block "css" .}}
 
     {{end}}
@@ -64,7 +52,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/reservation">Book Now</a>
+                        <a class="nav-link" href="/search-availability">Book Now</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/contact">Contact</a>
@@ -107,6 +95,9 @@
     {{end}}
 
     <script>
+        // variables for Prompt function
+        let attention = Prompt();
+
         // bootstrap form submissions validator
         (function () {
             'use strict';
@@ -200,10 +191,50 @@
                 })
             }
 
+            // custom async function for pop up prompt
+            async function custom(c) {
+                const {
+                    msg = "",
+                    title = "",
+                } = c;
+
+                const {
+                    value: formValues
+                } = await Swal.fire({
+                    title: title,
+                    html: msg,
+                    backdrop: false,
+                    focusConfirm: false,
+                    showCancelButton: true,
+                    willOpen: () => {
+                        const elem = document.getElementById("reservation-dates-modal");
+                        const rangepicker = new DateRangePicker(elem, {
+                            format: "yyyy-mm-dd",
+                            showOnFocus: true,
+                        });
+                    },
+                    didOpen: () => {
+                        document.getElementById("checkInDate").removeAttribute("disabled");
+                        document.getElementById("checkOutDate").removeAttribute("disabled");
+                    },
+                    preConfirm: () => {
+                        return [
+                            document.getElementById('checkInDate').value,
+                            document.getElementById('checkOutDate').value
+                        ]
+                    },
+                })
+
+                if (formValues) {
+                    Swal.fire(JSON.stringify(formValues))
+                }
+            }
+
             return {
                 toast: toast,
                 success: success,
                 error: error,
+                custom: custom,
             }
         }
     </script>

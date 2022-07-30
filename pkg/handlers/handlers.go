@@ -59,9 +59,9 @@ func (m *Repository) Deluxe(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "deluxe.page.tmpl", &models.TemplateData{})
 }
 
-// Reservation is the reservation page handler function
-func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, "reservation.page.tmpl", &models.TemplateData{})
+// Availability is the search for available room page handler function
+func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "search-availability.page.tmpl", &models.TemplateData{})
 }
 
 // Contact is the contact page handler function
