@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/bagashiz/Go-Booking-Web-App/pkg/config"
-	"github.com/bagashiz/Go-Booking-Web-App/pkg/models"
-	"github.com/bagashiz/Go-Booking-Web-App/pkg/render"
+	"github.com/bagashiz/Go-Booking-Web-App/internal/config"
+	"github.com/bagashiz/Go-Booking-Web-App/internal/models"
+	"github.com/bagashiz/Go-Booking-Web-App/internal/render"
 )
 
 // Repo is a variable that holds the repository used by the handlers

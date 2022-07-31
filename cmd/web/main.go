@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/bagashiz/Go-Booking-Web-App/pkg/config"
-	"github.com/bagashiz/Go-Booking-Web-App/pkg/handlers"
-	"github.com/bagashiz/Go-Booking-Web-App/pkg/render"
+	"github.com/bagashiz/Go-Booking-Web-App/internal/config"
+	"github.com/bagashiz/Go-Booking-Web-App/internal/handlers"
+	"github.com/bagashiz/Go-Booking-Web-App/internal/render"
 )
 
 // app is a variable that holds the application configuration from config.go

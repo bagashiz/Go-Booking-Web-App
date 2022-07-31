@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/bagashiz/Go-Booking-Web-App/pkg/config"
-	"github.com/bagashiz/Go-Booking-Web-App/pkg/handlers"
+	"github.com/bagashiz/Go-Booking-Web-App/internal/config"
+	"github.com/bagashiz/Go-Booking-Web-App/internal/handlers"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )
