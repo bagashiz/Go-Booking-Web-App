@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/bagashiz/Go-Booking-Web-App/internal/config"
+	"github.com/bagashiz/Go-Booking-Web-App/internal/forms"
 	"github.com/bagashiz/Go-Booking-Web-App/internal/models"
 	"github.com/bagashiz/Go-Booking-Web-App/internal/render"
 )
@@ -102,7 +103,13 @@ func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, r, "contact.page.tmpl", &models.TemplateData{})
 }
 
-// MakeReservation is the make-reservation page handler function
-func (m *Repository) MakeReservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{})
+// Reservation is the make-reservation page handler function
+func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, r, "make-reservation.page.tmpl", &models.TemplateData{
+		Form: forms.New(nil),
+	})
+}
+
+// PostReservation is the POST request of make-reservation page handler function
+func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 }
