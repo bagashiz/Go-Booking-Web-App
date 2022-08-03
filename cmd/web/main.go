@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
@@ -9,6 +10,7 @@ import (
 	"github.com/alexedwards/scs/v2"
 	"github.com/bagashiz/Go-Booking-Web-App/internal/config"
 	"github.com/bagashiz/Go-Booking-Web-App/internal/handlers"
+	"github.com/bagashiz/Go-Booking-Web-App/internal/models"
 	"github.com/bagashiz/Go-Booking-Web-App/internal/render"
 )
 
@@ -23,6 +25,8 @@ const portNumber = ":8080"
 
 // main is the main application function
 func main() {
+	// Things to store in the session
+	gob.Register(models.Reservation{})
 
 	//* change this to true when in production
 	app.InProduction = false

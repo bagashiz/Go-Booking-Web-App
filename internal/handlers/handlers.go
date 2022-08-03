@@ -58,6 +58,11 @@ func (m *Repository) Executive(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, r, "executive.page.tmpl", &models.TemplateData{})
 }
 
+// Contact is the contact page handler function
+func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, r, "contact.page.tmpl", &models.TemplateData{})
+}
+
 // Deluxe is the deluxe page handler function
 func (m *Repository) Deluxe(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, r, "deluxe.page.tmpl", &models.TemplateData{})
@@ -96,11 +101,6 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(out)
-}
-
-// Contact is the contact page handler function
-func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "contact.page.tmpl", &models.TemplateData{})
 }
 
 // Reservation is the make-reservation page handler function
@@ -146,4 +146,24 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
+
+	m.App.Session.Put(r.Context(), "reservation", reservation)
+
+	http.Redirect(w, r, "/reservation-summary", http.StatusSeeOther)
+}
+
+// ReservationSummary is the reservation-summary page handler function
+func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
+	reservation, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
+	if !ok {
+		log.Println("cannot get item from session.")
+		return
+	}
+
+	data := make(map[string]interface{})
+	data["reservation"] = reservation
+
+	render.RenderTemplate(w, r, "reservation-summary.page.tmpl", &models.TemplateData{
+		Data: data,
+	})
 }
