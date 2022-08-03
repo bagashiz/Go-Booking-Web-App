@@ -135,6 +135,16 @@
             })
         }
 
+        {{with .Error}}
+        notify("{{.}}", "error")
+        {{end}}
+        {{with .Flash}}
+        notify("{{.}}", "success")
+        {{end}}
+        {{with .Warning}}
+        notify("{{.}}", "warning")
+        {{end}}
+
         // Prompt function with sweetalert2 to send many types of pop-up notifications
         function Prompt() {
             let toast = function (c) {
