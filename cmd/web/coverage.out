@@ -1,0 +1,11 @@
+mode: set
+github.com/bagashiz/Go-Booking-Web-App/cmd/web/routes.go:13.49,39.2 18 1
+github.com/bagashiz/Go-Booking-Web-App/cmd/web/main.go:27.13,29.16 2 0
+github.com/bagashiz/Go-Booking-Web-App/cmd/web/main.go:33.2,40.16 4 0
+github.com/bagashiz/Go-Booking-Web-App/cmd/web/main.go:29.16,31.3 1 0
+github.com/bagashiz/Go-Booking-Web-App/cmd/web/main.go:40.16,42.3 1 0
+github.com/bagashiz/Go-Booking-Web-App/cmd/web/main.go:46.18,63.16 10 1
+github.com/bagashiz/Go-Booking-Web-App/cmd/web/main.go:68.2,75.12 6 1
+github.com/bagashiz/Go-Booking-Web-App/cmd/web/main.go:63.16,66.3 2 0
+github.com/bagashiz/Go-Booking-Web-App/cmd/web/middleware.go:10.45,21.2 3 1
+github.com/bagashiz/Go-Booking-Web-App/cmd/web/middleware.go:24.50,26.2 1 1

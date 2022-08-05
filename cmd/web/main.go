@@ -25,6 +25,25 @@ const portNumber = ":8080"
 
 // main is the main application function
 func main() {
+	err := run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	srv := &http.Server{
+		Addr:    portNumber,
+		Handler: routes(&app),
+	}
+
+	fmt.Printf("Starting server on http://localhost%v/\n", portNumber)
+	err = srv.ListenAndServe()
+	if err != nil {
+		log.Fatal("Error starting server: ", err)
+	}
+
+}
+
+func run() error {
 	// Things to store in the session
 	gob.Register(models.Reservation{})
 
@@ -43,6 +62,7 @@ func main() {
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("Error creating template cache: ", err)
+		return err
 	}
 
 	app.TemplateCache = tc
@@ -51,15 +71,6 @@ func main() {
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
 	render.NewTemplates(&app)
-	srv := &http.Server{
-		Addr:    portNumber,
-		Handler: routes(&app),
-	}
 
-	fmt.Printf("Starting server on http://localhost%v/\n", portNumber)
-	err = srv.ListenAndServe()
-	if err != nil {
-		log.Fatal("Error starting server: ", err)
-	}
-
+	return nil
 }
